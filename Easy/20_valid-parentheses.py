@@ -24,3 +24,25 @@ class Solution:
             
 S1 = Solution
 print(S1.isValid(S1, "{}{}{}{}[()()]"))
+
+
+class Solution: # this one is faster
+    def isValid(self, s: str) -> bool:
+      stack = []
+      complement = {
+        ")": "(",
+        "]": "[",
+        "}": "{"
+      }
+
+      for string in s:
+        if string in complement.keys():
+          if not stack or stack.pop() != complement[string]:
+            return False
+        else:
+          stack.append(string)
+
+      if stack:
+        return False
+      return True
+        
